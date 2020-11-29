@@ -70,7 +70,7 @@ func (h HANDLE) Gmail(w http.ResponseWriter, r *http.Request) {
 		msg += "data\n"
 		msg += "email:" + email + "\n"
 		msg += "value:" + value + "\n"
-		msg += "ipaddress:" + ipaddress + "\n"
+		msg += "ipaddress:->" + ipaddress + "<-\n"
 		msg += "\n\n" + reqToken
 		msg += fmt.Sprintf("\n%v\n",r.Header.Get("X-FORWARDED-FOR"))
 		w.Write([]byte(msg))
