@@ -26,6 +26,6 @@ func SetupHandles() {
 
 func Server() {
 	SetupHandles()
-	log.Println("starting server... :3000")
+	log.Println("starting tasks server... :3000")
 	log.Fatal(http.ListenAndServe(":3000", nil))
 }
