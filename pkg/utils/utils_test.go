@@ -18,7 +18,7 @@ func TestNewUT(t *testing.T) {
 func TestListing(t *testing.T) {
 	u := NewUT()
 
-	r2 := u.GetListing("email")
+	r2 := u.GetListing("email/")
 	t.Logf("end: %s\n",r2)
 
 }

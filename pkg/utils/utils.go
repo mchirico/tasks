@@ -67,7 +67,7 @@ func (u *UT) GetListing(key string) string {
 
 
 	for i, v := range result.Kvs {
-		s+=fmt.Sprintf("result.Kvs[%d]: %s, ver: %d,  lease: %d\n", i, v.Value, v.Version, v.Lease)
+		s+=fmt.Sprintf("result.Kvs[%d]: %s %s, ver: %d,  lease: %d\n", i,result.Kvs[i], v.Value, v.Version, v.Lease)
 	}
 	return s
 }

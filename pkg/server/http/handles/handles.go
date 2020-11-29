@@ -17,6 +17,7 @@ var CountStatus = 0
 type HANDLE struct {
 	Process func() string
 	ProcessGmail func(email, value string,ttl int64) string
+	Token string
 }
 
 func (h HANDLE) BaseRoot(w http.ResponseWriter, r *http.Request) {
@@ -67,11 +68,14 @@ func (h HANDLE) Gmail(w http.ResponseWriter, r *http.Request) {
 	case "GET":
 		Count += 1
 
-		if ipaddress != "35.196.59.30" {
-			w.Write([]byte("Bad ipaddress"))
-			log.Printf("Badd ipaddress: %v\n",ipaddress)
+		if reqToken != h.Token {
+			msg := fmt.Sprintf("Bad token:%v\n" +
+				"h.Token: %v\n" +
+				"ipaddress: %v\n",reqToken,h.Token,ipaddress)
+			w.Write([]byte(msg))
 			return
 		}
+
         log.Printf("h.ProcessGmail: %v\n",email)
 		msg := h.ProcessGmail(email,ipaddress, 1200)
 		msg += "data\n"

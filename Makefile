@@ -1,6 +1,6 @@
 
 docker-build:
-	docker build  --no-cache -t gcr.io/septapig/tasks:test -f Dockerfile .
+	docker build --build-arg build_task_key=${TASK_KEY} --no-cache -t gcr.io/septapig/tasks:test -f Dockerfile .
 
 push:
 	docker push gcr.io/septapig/tasks:test

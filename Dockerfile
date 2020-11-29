@@ -20,5 +20,9 @@ COPY --from=builder --chown=65532:65532 /certs /certs
 
 USER nonroot:nonroot
 
+ARG build_task_key
+ENV TASK_KEY=$build_task_key
+
+
 
 ENTRYPOINT ["/project"]

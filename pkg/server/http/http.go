@@ -5,6 +5,7 @@ import (
 	"github.com/mchirico/tasks/pkg/utils"
 	"log"
 	"net/http"
+	"os"
 	_ "time/tzdata"
 )
 
@@ -15,6 +16,10 @@ func SetupHandles() {
 	u2 := utils.NewUT()
 	h.Process = u.Status
 	h.ProcessGmail = u2.Email
+	h.Token = os.Getenv("TASK_KEY")
+	if h.Token == "" {
+		h.Token="aslskdjsaaa_NOALL"
+	}
 
 	http.HandleFunc("/", h.BaseRoot)
 	http.HandleFunc("/gmail", h.Gmail)
