@@ -15,7 +15,7 @@ limitations under the License.
 */
 package main
 
-import "github.com/mchirico/go-etcd/cmd"
+import "github.com/mchirico/tasks/cmd"
 
 func main() {
 	cmd.Execute()

@@ -2,7 +2,8 @@ package handles
 
 import (
 	"fmt"
-	"github.com/mchirico/go-etcd/pkg/etcdutils"
+	"github.com/mchirico/tasks/pkg/utils"
+
 	"io/ioutil"
 	"net/http/httptest"
 	"strings"
@@ -14,8 +15,8 @@ func Test_RootGET(t *testing.T) {
 	w := httptest.NewRecorder()
 
 	h := HANDLE{}
-	e := etcdutils.NewETC("../../../../certs")
-	h.Process = e.EtcdRun
+	e := utils.NewUT()
+	h.Process = e.Status
 
 	h.BaseRoot(w, req)
 
@@ -26,8 +27,8 @@ func Test_RootGET(t *testing.T) {
 	fmt.Println(resp.Header.Get("Content-Type"))
 	fmt.Println(string(body))
 
-	if !strings.Contains(string(body), "Value:") {
-		t.Fatalf("GET on root failed")
+	if !strings.Contains(string(body), "tasks/status") {
+		t.Fatalf("GET on root failed: %s\n",body)
 	}
 
 }
@@ -37,8 +38,8 @@ func Test_RootPUT(t *testing.T) {
 	w := httptest.NewRecorder()
 
 	h := HANDLE{}
-	e := etcdutils.NewETC("../../../../certs")
-	h.Process = e.EtcdRun
+	e := utils.NewUT()
+	h.Process = e.Status
 
 	h.BaseRoot(w, req)
 
@@ -60,8 +61,8 @@ func Test_RootPOST(t *testing.T) {
 	w := httptest.NewRecorder()
 
 	h := HANDLE{}
-	e := etcdutils.NewETC("../../../../certs")
-	h.Process = e.EtcdRun
+	e := utils.NewUT()
+	h.Process = e.Status
 
 	h.BaseRoot(w, req)
 

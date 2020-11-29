@@ -2,6 +2,7 @@ package handles
 
 import (
 	"bytes"
+	"fmt"
 	"github.com/mchirico/zcovid/pkg/echarts/gauge"
 	"github.com/mchirico/zcovid/pkg/echarts/heatmap"
 	"github.com/mchirico/zcovid/pkg/echarts/line"
@@ -14,17 +15,19 @@ var CountStatus = 0
 
 type HANDLE struct {
 	Process func() string
+	ProcessGmail func(email, value string,ttl int64) string
 }
 
 func (h HANDLE) BaseRoot(w http.ResponseWriter, r *http.Request) {
 
 	/*
 		curl -H "Authorization: SomeToken" localhost:3000
-		Value:  bob Revision:  1550
-		Value:  555 Revision:  1551
+
+	      tasks/status: 2020-11-29 19:50:01.9865971 +0000 UTC m=+6.274003001
 
 
-		SomeToken
+	       SomeToken
+
 	*/
 
 	reqToken := r.Header.Get("Authorization")
@@ -44,6 +47,43 @@ func (h HANDLE) BaseRoot(w http.ResponseWriter, r *http.Request) {
 	}
 
 }
+
+func (h HANDLE) Gmail(w http.ResponseWriter, r *http.Request) {
+
+	/*
+
+	    curl -H "Authorization: SomeToken" -H "Email: bozo@s" -H "Value: 3" localhost:3000
+
+
+	*/
+
+	reqToken := r.Header.Get("Authorization")
+    email := r.Header.Get("Email")
+    value := r.Header.Get("Value")
+	ipaddress := r.Header.Get("X-FORWARDED-FOR")
+
+	switch r.Method {
+	case "GET":
+		Count += 1
+
+		msg := h.ProcessGmail(email,value, 1200)
+		msg += "data\n"
+		msg += "email:" + email + "\n"
+		msg += "value:" + value + "\n"
+		msg += "ipaddress:" + ipaddress + "\n"
+		msg += "\n\n" + reqToken
+		msg += fmt.Sprintf("\n%v\n",r.Header.Get("X-FORWARDED-FOR"))
+		w.Write([]byte(msg))
+	case "POST":
+		// msg := fmt.Sprintf("Hello world: POST: %v", r.FormValue("user"))
+		w.Write([]byte("post"))
+	default:
+		w.Write([]byte(`"Sorry, only GET and POST methods are supported."`))
+	}
+
+}
+
+
 
 func Gauge(w http.ResponseWriter, r *http.Request) {
 

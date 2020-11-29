@@ -145,6 +145,10 @@ github.com/mattn/go-colorable v0.0.9/go.mod h1:9vuHe8Xs5qXnSaW/c/ABM9alt+Vo+STaO
 github.com/mattn/go-isatty v0.0.3/go.mod h1:M+lRXTBqGeGNdLjl/ufCoiOlB5xdOkqRJdNxMWT7Zi4=
 github.com/matttproud/golang_protobuf_extensions v1.0.1 h1:4hp9jkHxhMHkqkrB3Ix0jegS5sx/RkqARlsWZ6pIwiU=
 github.com/matttproud/golang_protobuf_extensions v1.0.1/go.mod h1:D8He9yQNgCq6Z5Ld7szi9bcBfOoFv/3dc6xSMkL2PC0=
+github.com/mchirico/go-etcd v0.0.0-20201122190310-c15cc72bdfea h1:QJyNYkpagg69859Sfi3rKrSyZfGReJUNg75c7Tm5CHk=
+github.com/mchirico/go-etcd v0.0.0-20201122190310-c15cc72bdfea/go.mod h1:fAK1oZAfoaolIeRSeNwgADPU5iDAa8ZOW0yZUMXjnZQ=
+github.com/mchirico/go.etcd v0.0.14 h1:JYD2703D7zSx8CXcTdnH+KpfWO1EZULXlS1lHiuKits=
+github.com/mchirico/go.etcd v0.0.14/go.mod h1:EHNQIfXm2azZ1KbuCR2PXvEVbEvZcjA5IpxO78AKNcI=
 github.com/mchirico/zcovid v0.0.0-20201113153007-0561f03a907c h1:QCzxpVxPKdpdSc/Fg5Hban5fmlLhSDavvEw0+2pS5yg=
 github.com/mchirico/zcovid v0.0.0-20201113153007-0561f03a907c/go.mod h1:tRdJauMOQi7bTGZmhInHEdJM9820WdcCtTeeGRGKeaU=
 github.com/miekg/dns v1.0.14/go.mod h1:W1PPwlIAgtquWBMBEV9nkV9Cazfe8ScdGz/Lj7v3Nrg=

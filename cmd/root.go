@@ -17,7 +17,7 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/mchirico/go-etcd/pkg/server/http"
+	"github.com/mchirico/tasks/pkg/server/http"
 	"github.com/spf13/cobra"
 	"os"
 
