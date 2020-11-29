@@ -72,12 +72,13 @@ func (h HANDLE) Gmail(w http.ResponseWriter, r *http.Request) {
 			msg := fmt.Sprintf("Bad token:%v\n" +
 				"h.Token: %v\n" +
 				"ipaddress: %v\n",reqToken,h.Token,ipaddress)
+			log.Printf("%v\n",msg)
 			w.Write([]byte(msg))
 			return
 		}
 
         log.Printf("h.ProcessGmail: %v\n",email)
-		msg := h.ProcessGmail(email,ipaddress, 1200)
+		msg := h.ProcessGmail(email,ipaddress, 3600)
 		msg += "data\n"
 		msg += "email:" + email + "\n"
 		msg += "value:" + value + "\n"
