@@ -6,6 +6,7 @@ import (
 	"github.com/mchirico/zcovid/pkg/echarts/gauge"
 	"github.com/mchirico/zcovid/pkg/echarts/heatmap"
 	"github.com/mchirico/zcovid/pkg/echarts/line"
+	"log"
 
 	"net/http"
 )
@@ -66,13 +67,20 @@ func (h HANDLE) Gmail(w http.ResponseWriter, r *http.Request) {
 	case "GET":
 		Count += 1
 
-		msg := h.ProcessGmail(email,value, 1200)
+		if ipaddress != "35.196.59.30" {
+			w.Write([]byte("Bad ipaddress"))
+			log.Printf("Badd ipaddress: %v\n",ipaddress)
+			return
+		}
+        log.Printf("h.ProcessGmail: %v\n",email)
+		msg := h.ProcessGmail(email,ipaddress, 1200)
 		msg += "data\n"
 		msg += "email:" + email + "\n"
 		msg += "value:" + value + "\n"
 		msg += "ipaddress:->" + ipaddress + "<-\n"
 		msg += "\n\n" + reqToken
 		msg += fmt.Sprintf("\n%v\n",r.Header.Get("X-FORWARDED-FOR"))
+		log.Printf("msg: %v\n",msg)
 		w.Write([]byte(msg))
 	case "POST":
 		// msg := fmt.Sprintf("Hello world: POST: %v", r.FormValue("user"))

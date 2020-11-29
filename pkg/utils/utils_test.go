@@ -15,6 +15,16 @@ func TestNewUT(t *testing.T) {
 
 }
 
+func TestListing(t *testing.T) {
+	u := NewUT()
+
+	r2 := u.GetListing("email")
+	t.Logf("end: %s\n",r2)
+
+}
+
+
+
 func TestUT_Status(t *testing.T) {
 	u := NewUT()
 	fmt.Println(u.Status())
