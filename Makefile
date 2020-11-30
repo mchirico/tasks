@@ -12,7 +12,7 @@ run:
 	docker run --name tasks --rm -it -p 3000:3000  gcr.io/septapig/tasks:test
 
 
-deploy:
+deploy: docker-build push
 	gcloud beta run deploy tasks  --image gcr.io/septapig/tasks:test --platform managed \
             --allow-unauthenticated --project septapig \
             --vpc-connector=cloudvpc-east \
