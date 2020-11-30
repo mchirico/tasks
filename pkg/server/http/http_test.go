@@ -9,7 +9,7 @@ import (
 func TestPrep(t *testing.T) {
 	fmt.Println("nothing yet..")
 	r := os.Getenv("TASK_KEYa")
-	if r=="" {
+	if r == "" {
 		fmt.Println("empty")
 	}
 	fmt.Println(r)

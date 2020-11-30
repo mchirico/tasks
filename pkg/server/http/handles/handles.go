@@ -15,20 +15,20 @@ var Count = 0
 var CountStatus = 0
 
 type HANDLE struct {
-	Process func() string
-	ProcessGmail func(email, value string,ttl int64) string
-	Token string
+	Process      func() string
+	ProcessGmail func(email, value string, ttl int64) string
+	Token        string
 }
 
 func (h HANDLE) BaseRoot(w http.ResponseWriter, r *http.Request) {
 
 	/*
-		curl -H "Authorization: SomeToken" localhost:3000
+			curl -H "Authorization: SomeToken" localhost:3000
 
-	      tasks/status: 2020-11-29 19:50:01.9865971 +0000 UTC m=+6.274003001
+		      tasks/status: 2020-11-29 19:50:01.9865971 +0000 UTC m=+6.274003001
 
 
-	       SomeToken
+		       SomeToken
 
 	*/
 
@@ -54,14 +54,14 @@ func (h HANDLE) Gmail(w http.ResponseWriter, r *http.Request) {
 
 	/*
 
-	    curl -H "Authorization: SomeToken" -H "Email: bozo@s" -H "Value: 3" localhost:3000
+	   curl -H "Authorization: SomeToken" -H "Email: bozo@s" -H "Value: 3" localhost:3000
 
 
 	*/
 
 	reqToken := r.Header.Get("Authorization")
-    email := r.Header.Get("Email")
-    value := r.Header.Get("Value")
+	email := r.Header.Get("Email")
+	value := r.Header.Get("Value")
 	ipaddress := r.Header.Get("X-FORWARDED-FOR")
 
 	switch r.Method {
@@ -69,23 +69,23 @@ func (h HANDLE) Gmail(w http.ResponseWriter, r *http.Request) {
 		Count += 1
 
 		if reqToken != h.Token {
-			msg := fmt.Sprintf("Bad token:%v\n" +
-				"h.Token: %v\n" +
-				"ipaddress: %v\n",reqToken,h.Token,ipaddress)
-			log.Printf("%v\n",msg)
+			msg := fmt.Sprintf("Bad token:%v\n"+
+				"h.Token: %v\n"+
+				"ipaddress: %v\n", reqToken, h.Token, ipaddress)
+			log.Printf("%v\n", msg)
 			w.Write([]byte(msg))
 			return
 		}
 
-        log.Printf("h.ProcessGmail: %v\n",email)
-		msg := h.ProcessGmail(email,ipaddress, 3600)
+		log.Printf("h.ProcessGmail: %v\n", email)
+		msg := h.ProcessGmail(email, ipaddress, 3600)
 		msg += "data\n"
 		msg += "email:" + email + "\n"
 		msg += "value:" + value + "\n"
 		msg += "ipaddress:->" + ipaddress + "<-\n"
 		msg += "\n\n" + reqToken
-		msg += fmt.Sprintf("\n%v\n",r.Header.Get("X-FORWARDED-FOR"))
-		log.Printf("msg: %v\n",msg)
+		msg += fmt.Sprintf("\n%v\n", r.Header.Get("X-FORWARDED-FOR"))
+		log.Printf("msg: %v\n", msg)
 		w.Write([]byte(msg))
 	case "POST":
 		// msg := fmt.Sprintf("Hello world: POST: %v", r.FormValue("user"))
@@ -95,8 +95,6 @@ func (h HANDLE) Gmail(w http.ResponseWriter, r *http.Request) {
 	}
 
 }
-
-
 
 func Gauge(w http.ResponseWriter, r *http.Request) {
 

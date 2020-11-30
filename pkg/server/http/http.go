@@ -18,7 +18,7 @@ func SetupHandles() {
 	h.ProcessGmail = u2.Email
 	h.Token = os.Getenv("TASK_KEY")
 	if h.Token == "" {
-		h.Token="aslskdjsaaa_NOALL"
+		h.Token = "aslskdjsaaa_NOALL"
 	}
 
 	http.HandleFunc("/", h.BaseRoot)
