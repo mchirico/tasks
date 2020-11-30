@@ -78,7 +78,7 @@ func (h HANDLE) Gmail(w http.ResponseWriter, r *http.Request) {
 		}
 
 		log.Printf("h.ProcessGmail: %v\n", email)
-		msg := h.ProcessGmail(email, ipaddress, 3600)
+		msg := h.ProcessGmail(email, value, 3600)
 		msg += "data\n"
 		msg += "email:" + email + "\n"
 		msg += "value:" + value + "\n"
