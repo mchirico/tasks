@@ -53,10 +53,7 @@ func (h HANDLE) BaseRoot(w http.ResponseWriter, r *http.Request) {
 func (h HANDLE) Gmail(w http.ResponseWriter, r *http.Request) {
 
 	/*
-
 	   curl -H "Authorization: SomeToken" -H "Email: bozo@s" -H "Value: 3" localhost:3000
-
-
 	*/
 
 	reqToken := r.Header.Get("Authorization")
